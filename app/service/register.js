@@ -14,6 +14,7 @@ class UserService extends Service {
             console.log('result',result)
             res.data = {username,userType};
             res.code = 205;
+            res.msg = '注册成功';
         } else {
             res.code = 400;
             res.msg = '该用户已存在';
