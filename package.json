@@ -4,7 +4,7 @@
   "description": "",
   "private": true,
   "egg": {
-    "declarations": true
+    "declarations": false
   },
   "dependencies": {
     "blueimp-md5": "^2.10.0",

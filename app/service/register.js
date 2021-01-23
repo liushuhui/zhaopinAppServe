@@ -1,4 +1,3 @@
-const md5 = require('blueimp-md5')
 const Service = require('egg').Service;
 class UserService extends Service {
     async add() {
@@ -8,9 +7,8 @@ class UserService extends Service {
         const db = ctx.model.User;
         const findResult = await db.findOne({username});
         if (!findResult) {
-            ctx.cookies.set('userid', username._id, {maxAge: 1000*60*60*24});
-            console.log('ctx1111222',ctx.cookies);
-           const result = db.create({username, userType, password});
+            const result = await db.create({username, userType, password});
+            ctx.cookies.set('userid', result._id, {maxAge: 1000*60*60*24, httpOnly:false});
             console.log('result',result)
             res.data = {username,userType};
             res.code = 205;

@@ -1,17 +1,14 @@
-const md5 = require('blueimp-md5')
 const Service = require('egg').Service;
 class LoginService extends Service {
     async login() {
         const { ctx }  = this;
         const res = {};
-        const {username,password} = ctx.request.body;
+        const {username,password, userType} = ctx.request.body;
         const db = ctx.model.User;
         const findResult = await db.findOne({username});
-        console.log('findResult',findResult);
-        console.log('password',password);
         if (findResult && (password === findResult.password)) {
-            ctx.cookies.set('userid', username._id, {maxAge: 1000*60*60*24});
-            res.data = {username};
+            ctx.cookies.set('userid', findResult._id, {maxAge: 1000*60*60*24, httpOnly:false});
+            res.data = {username, userType: findResult.userType};
             res.code = 205;
             res.msg = '登录成功'
         } 
