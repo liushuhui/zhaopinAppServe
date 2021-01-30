@@ -7,7 +7,7 @@ class LoginService extends Service {
         const db = ctx.model.User;
         const findResult = await db.findOne({username});
         if (findResult && (password === findResult.password)) {
-            ctx.cookies.set('userid', findResult._id, {maxAge: 1000*60*60*24, httpOnly:false,signed: false});
+            ctx.cookies.set('userid', findResult._id, {maxAge: 1000*60*60*24, httpOnly:false});
             res.data = {username, userType: findResult.userType};
             res.code = 205;
             res.msg = '登录成功'

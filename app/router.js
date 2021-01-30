@@ -11,6 +11,7 @@ module.exports = app => {
   router.get('/user', controller.getuser.getuser);
   router.get('/userlist', controller.userlist.index);
   router.get('/msglist', controller.getmsglist.index)
+  router.post('/readmsg', controller.readmsg.index)
   // app.io.of('/')
   io.route('postMsg', io.controller.chat.index);
   // app.io.of('/chat')
